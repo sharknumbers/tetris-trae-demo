@@ -1,0 +1,396 @@
+/* Shark-themed Tetris styling */
+
+html, body { margin: 0; padding: 0; }
+
+body {
+    background: #0a0a3a; /* Deep blue background */
+    color: #ffffff;
+}
+
+body, table, input {
+    font-size: 11px;
+    line-height: 1.2em;
+    font-family: 'Arial', sans-serif;
+    color: #ffffff;
+}
+
+#tetris {
+    position: relative;
+    width: 300px;
+    height: 309px;
+    background: #0a0a3a url('../img/shark-bg.svg') no-repeat center center; /* Shark background */
+    background-size: cover;
+    border: #4fc3f7 1px solid; /* Light blue border */
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(79, 195, 247, 0.5); /* Glowing effect */
+}
+
+/* Ocean background with waves */
+#tetris::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, 
+        rgba(10, 10, 58, 0.8) 0%,
+        rgba(10, 10, 58, 0.5) 40%,
+        rgba(10, 10, 58, 0.3) 100%);
+    z-index: 5;
+}
+
+/* Add stars to the background */
+#tetris::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
+    background-size: 100px 100px, 50px 50px, 150px 150px;
+    background-position: 0 0, 25px 25px, 50px 50px;
+    z-index: 4;
+}
+
+/* Add rainbow shark image to the left panel */
+#tetris .left::before {
+    content: '';
+    position: absolute;
+    top: 60px;
+    left: 15px;
+    width: 100px;
+    height: 100px;
+    background: url('../img/rainbow-shark.svg') no-repeat center center;
+    background-size: contain;
+    z-index: 6;
+    opacity: 0.7;
+}
+
+#tetris .left {
+    background: rgba(10, 10, 58, 0.7); /* Semi-transparent deep blue */
+    position: absolute;
+    width: 131px;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    z-index: 20;
+    border-right: 1px solid #4fc3f7; /* Light blue border */
+}
+
+.left-border { 
+    background: #4fc3f7; 
+    position: absolute; 
+    z-index: 100; 
+    top: 0px; 
+    left: 130px; 
+    width: 1px; 
+    height: 100%; 
+}
+
+#tetris-area {
+    background: rgba(10, 10, 58, 0.5); /* Semi-transparent deep blue */
+    position: absolute;
+    width: 167px;
+    height: 307px;
+    left: 132px;
+    top: 1px;
+    overflow: hidden;
+    z-index: 10;
+    backdrop-filter: blur(2px); /* Slight blur effect for depth */
+}
+
+#tetris-area::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(0deg, 
+            rgba(79, 195, 247, 0.2) 0%, 
+            rgba(79, 195, 247, 0.1) 20%, 
+            rgba(10, 10, 58, 0.1) 100%);
+    z-index: 5;
+    animation: wave 8s infinite linear;
+}
+
+@keyframes wave {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 200px; }
+}
+
+/* Grid lines with ocean wave effect */
+.grid1, .grid2, .grid3, .grid4, .grid5, .grid6 { 
+    z-index: 10; 
+    position: absolute; 
+    top: 0px; 
+    width: 1px; 
+    height: 307px; 
+    background: rgba(79, 195, 247, 0.2); /* Light blue with transparency */
+}
+
+/* Shark-themed tetris blocks */
+#tetris .block0,
+#tetris .block1,
+#tetris .block2,
+#tetris .block3,
+#tetris .block4,
+#tetris .block5,
+#tetris .block6,
+#tetris .falling-block,
+#tetris .locked-block {
+    z-index: 1000;
+    font-size: 10px;
+    line-height: 1em;
+    font-family: arial;
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+    box-sizing: border-box;
+    box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+/* Block animations */
+@keyframes shimmer {
+    0% { opacity: 0.8; }
+    50% { opacity: 1; }
+    100% { opacity: 0.8; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 2px rgba(255, 255, 255, 0.5); }
+    50% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.8); }
+    100% { box-shadow: 0 0 2px rgba(255, 255, 255, 0.5); }
+}
+
+@keyframes wave {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(1px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes flash {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(1.3); }
+    100% { filter: brightness(1); }
+}
+
+@keyframes ripple {
+    0% { box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+    50% { box-shadow: 0 0 3px 1px rgba(255, 255, 255, 0.3); }
+    100% { box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+}
+
+@keyframes sparkle {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+
+.shimmer { animation: shimmer 1.5s infinite ease-in-out; }
+.pulse { animation: pulse 1.5s infinite ease-in-out; }
+.glow { animation: glow 1.5s infinite ease-in-out; }
+.wave { animation: wave 1.5s infinite ease-in-out; }
+.flash { animation: flash 1.5s infinite ease-in-out; }
+.ripple { animation: ripple 1.5s infinite ease-in-out; }
+.sparkle { 
+    background-image: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.1) 75%, transparent 75%, transparent);
+    background-size: 4px 4px;
+    animation: sparkle 3s infinite linear;
+}
+
+/* I-Block - Light Blue */
+#tetris .block0 { 
+    background: linear-gradient(135deg, #4fc3f7, #29b6f6); 
+    border-color: #81d4fa;
+}
+
+/* O-Block - Yellow/Orange */
+#tetris .block1 { 
+    background: linear-gradient(135deg, #ffeb3b, #ffc107); 
+    border-color: #fff59d;
+}
+
+/* T-Block - Purple/Pink */
+#tetris .block2 { 
+    background: linear-gradient(135deg, #e040fb, #d500f9); 
+    border-color: #ea80fc;
+}
+
+/* S-Block - Green */
+#tetris .block3 { 
+    background: linear-gradient(135deg, #66bb6a, #43a047); 
+    border-color: #a5d6a7;
+}
+
+/* Z-Block - Red/Pink */
+#tetris .block4 { 
+    background: linear-gradient(135deg, #ff5252, #d50000); 
+    border-color: #ff8a80;
+}
+
+/* L-Block - Orange */
+#tetris .block5 { 
+    background: linear-gradient(135deg, #ff9800, #f57c00); 
+    border-color: #ffcc80;
+}
+
+/* J-Block - Blue */
+#tetris .block6 { 
+    background: linear-gradient(135deg, #2196f3, #1976d2); 
+    border-color: #90caf9;
+}
+
+/* Menu styling */
+#tetris .left h1, #tetris .left h2 {
+    color: #ffffff;
+    font-size: 14px;
+    font-family: "Arial", sans-serif;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 5px rgba(79, 195, 247, 0.7);
+}
+
+#tetris .left h1 a {
+    color: #4fc3f7;
+    text-decoration: none;
+}
+
+#tetris .left h1 a:hover {
+    color: #81d4fa;
+    text-decoration: none;
+}
+
+/* Menu buttons */
+#tetris .menu a, #tetris .menu a:visited {
+    display: block;
+    text-decoration: none;
+    color: #ffffff;
+    background: rgba(33, 150, 243, 0.3);
+    border: 1px solid #4fc3f7;
+    margin-bottom: -1px;
+    cursor: pointer;
+    text-align: left;
+    padding-left: 10px;
+    height: 19px;
+    line-height: 19px;
+    width: 78px;
+    padding-bottom: 1px;
+    margin-left: 20px;
+    border-radius: 3px;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+#tetris .menu a:hover { 
+    background: rgba(33, 150, 243, 0.5); 
+    box-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
+}
+
+/* Game over */
+#tetris-gameover {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    text-align: center;
+    font-weight: bold;
+    display: none;
+    color: #ff5252;
+    text-shadow: 0 0 10px rgba(255, 82, 82, 0.7);
+    font-size: 16px;
+}
+
+/* Controls section */
+#tetris-keys {
+    position: absolute;
+    left: 15px;
+    top: 135px;
+    width: 120px;
+    overflow: hidden;
+    z-index: 25;
+    color: #ffffff;
+}
+
+.tetris-key {
+    margin-bottom: 5px;
+    font-size: 10px;
+    line-height: 1.2em;
+    white-space: nowrap;
+    color: #e0f7fa;
+}
+
+/* Stats section */
+#tetris-stats {
+    position: absolute;
+    left: 15px;
+    bottom: 5px;
+    width: 120px;
+    overflow: hidden;
+    z-index: 25;
+    color: #e0f7fa;
+}
+
+#tetris .stats td { 
+    padding-bottom: 1px; 
+    line-height: 1.25em; 
+}
+
+#tetris-stats-level, 
+#tetris-stats-time, 
+#tetris-stats-apm, 
+#tetris-stats-lines, 
+#tetris-stats-score { 
+    font-weight: bold; 
+    color: #4fc3f7; 
+    text-shadow: 0 0 5px rgba(79, 195, 247, 0.5);
+}
+
+/* Sound controls */
+#tetris-sound-on a, #tetris-sound-off a {
+    color: #4fc3f7;
+    text-decoration: none;
+}
+
+#tetris-sound-on a:hover, #tetris-sound-off a:hover {
+    color: #81d4fa;
+    text-decoration: underline;
+}
+
+/* Window styling */
+#tetris .window {
+    background: rgba(10, 10, 58, 0.9);
+    border: 1px solid #4fc3f7;
+    box-shadow: 0 0 15px rgba(79, 195, 247, 0.5);
+}
+
+#tetris .window .top {
+    background: rgba(33, 150, 243, 0.5);
+    color: #ffffff;
+}
+
+#tetris .window .close {
+    color: #ffffff;
+}
+
+#tetris .window .content {
+    color: #e0f7fa;
+}
+
+/* Area cover styling */
+#tetris-area-cover-keys {
+    background: rgba(10, 10, 58, 0.8);
+    color: #e0f7fa;
+}
+
+#tetris-area-cover-keys .keys b {
+    color: #4fc3f7;
+    text-shadow: 0 0 5px rgba(79, 195, 247, 0.5);
+}

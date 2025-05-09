@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+	<title>Shark Tetris - Underwater Adventure</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link href="css/tetris.css" rel="stylesheet" type="text/css">
+	<link href="css/shark-theme.css" rel="stylesheet" type="text/css">
+	<link href="img/tetris.ico" rel="shortcut icon">
+	<script type="text/javascript" src="js/stats.js"></script>
+	<script type="text/javascript" src="js/tetris.js"></script>
+	<style type="text/css">
+	html, body { height: 100%; }
+	#tetris { margin: 0 auto; }
+	</style>
+</head>
+<body>
+
+<table style="width: 100%; height: 100%;" cellspacing="0" cellpadding="0"><tr><td style="vertical-align: middle;">
+
+	<div id="tetris">
+		<div class="left">
+			<h1><a href="https://github.com/cztomczak/jstetris">Shark Tetris</a></h1>
+			<div class="menu">
+				<div><a href="javascript:void(0)" id="tetris-menu-start">New Game</a></div>
+				<div id="tetris-pause">
+					<a href="javascript:void(0)" id="tetris-menu-pause">Pause</a>
+				</div>
+				<div style="display: none;" id="tetris-resume">
+					<a href="javascript:void(0)" id="tetris-menu-resume">Resume</a>
+				</div>
+				<div><a href="javascript:void(0)" id="tetris-menu-highscores">Highscores</a></div>
+				<div><a href="javascript:void(0)" id="tetris-menu-help">About</a></div>
+			</div>
+			<!-- Next piece preview removed -->
+			<div id="tetris-gameover">Game Over</div>
+			<div id="tetris-keys">
+				<div>Use keyboard:</div>
+				<div class="tetris-key"><img src="img/key-left.gif" alt=""> move left</div>
+				<div class="tetris-key"><img src="img/key-right.gif" alt=""> move right</div>
+				<div class="tetris-key"><img src="img/key-up.gif" alt=""> rotate</div>
+				<div class="tetris-key"><img src="img/key-down.gif" alt=""> move down</div>
+				<div class="tetris-key"><img src="img/key-space.gif" alt=""> fall to the bottom</div>
+			</div>
+			<div id="tetris-stats">
+				<div class="tetris-line"><span id="tetris-stats-level" class="tetris-stats">1</span>Level</div>
+				<div class="tetris-line"><span id="tetris-stats-lines" class="tetris-stats">0</span>Lines</div>
+				<div class="tetris-line"><span id="tetris-stats-score" class="tetris-stats">0</span>Score</div>
+				<div class="tetris-line"><span id="tetris-stats-apm" class="tetris-stats">0</span>APM</div>
+			</div>
+		</div>
+		<div class="right">
+			<div id="tetris-area">
+				<div id="tetris-area-data"></div>
+				<div id="tetris-area-cover"></div>
+				<div id="tetris-area-cover-keys">
+					<div class="keys">
+						<b>Controls:</b><br>
+						<br>
+						<img src="img/key-left.gif" alt=""> <img src="img/key-right.gif" alt=""> - move left/right<br>
+						<br>
+						<img src="img/key-up.gif" alt=""> - rotate<br>
+						<br>
+						<img src="img/key-down.gif" alt=""> - move down<br>
+						<br>
+						<img src="img/key-space.gif" alt=""> - fall to the bottom<br>
+						<br>
+						<b>Click to start game</b>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div id="tetris-sound"></div>
+		<div id="tetris-sound-on">
+			<a href="javascript:void(0)" id="tetris-sound-on-off">Turn sound off</a>
+		</div>
+		<div id="tetris-sound-off" style="display: none;">
+			<a href="javascript:void(0)" id="tetris-sound-off-on">Turn sound on</a>
+		</div>
+		<div id="tetris-message"></div>
+		<div id="tetris-loading"><div>Loading game...</div></div>
+		<div id="tetris-grid">
+			<div class="grid1"></div>
+			<div class="grid2"></div>
+			<div class="grid3"></div>
+			<div class="grid4"></div>
+			<div class="grid5"></div>
+			<div class="grid6"></div>
+		</div>
+		<div id="tetris-help" class="window">
+			<div class="top">
+				About <span id="tetris-help-close" class="close">x</span>
+			</div>
+			<div class="content" style="margin-top: 1em;">
+				<div style="margin-top: 1em;">
+				<div>JsTetris is a highly customizable tetris game written in javascript,
+				full sources available, it is free to modify.
+				</div>
+				<br>
+				<div>Author: Czarek Tomczak</div>
+				<div>Site: <a href="https://github.com/cztomczak/jstetris">github.com/cztomczak/jstetris</a></div>
+				<br>
+				<div>License: BSD revised (free for any use)</div>
+				</div>
+			</div>
+		</div>
+		<div id="tetris-highscores" class="window">
+			<div class="top">
+				Highscores <span id="tetris-highscores-close" class="close">x</span>
+			</div>
+			<div class="content">
+				<div id="tetris-highscores-content"></div>
+				<br>
+				Note: these scores are kept in cookies, they are only visible to your computer.
+			</div>
+		</div>
+	</div>
+
+</td></tr></table>
+
+	<script type="text/javascript">
+	// Hide loading message immediately before page fully loads
+	document.addEventListener('DOMContentLoaded', function() {
+		var loadingElement = document.getElementById('tetris-loading');
+		if (loadingElement) {
+			loadingElement.style.display = 'none';
+		}
+	});
+	
+	window.onload = function() {
+		// Hide loading message again to be sure
+		var loadingElement = document.getElementById('tetris-loading');
+		if (loadingElement) {
+			loadingElement.style.display = 'none';
+		}
+		
+		// Initialize the game with correct dimensions before creating the Tetris object
+		var unit = 14; // Original block size
+		var areaX = 12; // Original game area width
+		var areaY = 22; // Original game area height
+		
+		// Update CSS for game container to accommodate the game area
+		var tetrisContainer = document.getElementById('tetris');
+		if (tetrisContainer) {
+			tetrisContainer.style.width = (areaX * unit + 132) + 'px'; // 132px for the left panel
+		}
+		
+		// Update CSS for game area
+		var areaElement = document.getElementById('tetris-area');
+		if (areaElement) {
+			areaElement.style.display = 'block';
+			areaElement.style.width = (areaX * unit) + 'px';
+			areaElement.style.height = (areaY * unit) + 'px';
+		}
+		
+		// Initialize the game
+		window.tetris = new Tetris();
+		
+		// Ensure the New Game button works
+		var startButton = document.getElementById('tetris-menu-start');
+		if (startButton) {
+			startButton.onclick = function() { window.tetris.start(); return false; };
+		}
+	};
+	</script>
+
+</body>
+</html>

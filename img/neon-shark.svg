@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <!-- Dark Background with Ripple Effect -->
+  <rect width="300" height="300" fill="#0a001a"/>
+  
+  <!-- Ripple Effect Circles -->
+  <circle cx="150" cy="150" r="140" fill="none" stroke="#9c27b0" stroke-width="1" opacity="0.2"/>
+  <circle cx="150" cy="150" r="120" fill="none" stroke="#9c27b0" stroke-width="1" opacity="0.3"/>
+  <circle cx="150" cy="150" r="100" fill="none" stroke="#9c27b0" stroke-width="1" opacity="0.4"/>
+  <circle cx="150" cy="150" r="80" fill="none" stroke="#9c27b0" stroke-width="1" opacity="0.5"/>
+  <circle cx="150" cy="150" r="60" fill="none" stroke="#9c27b0" stroke-width="1" opacity="0.6"/>
+  
+  <!-- Neon Waves -->
+  <path d="M0,220 Q30,200 60,220 Q90,240 120,220 Q150,200 180,220 Q210,240 240,220 Q270,200 300,220 L300,300 L0,300 Z" fill="#ff0066" opacity="0.3"/>
+  <path d="M0,240 Q30,220 60,240 Q90,260 120,240 Q150,220 180,240 Q210,260 240,240 Q270,220 300,240 L300,300 L0,300 Z" fill="#9c27b0" opacity="0.4"/>
+  <path d="M0,260 Q30,240 60,260 Q90,280 120,260 Q150,240 180,260 Q210,280 240,260 Q270,240 300,260 L300,300 L0,300 Z" fill="#673ab7" opacity="0.5"/>
+  <path d="M0,280 Q30,260 60,280 Q90,300 120,280 Q150,260 180,280 Q210,300 240,280 Q270,260 300,280 L300,300 L0,300 Z" fill="#3f51b5" opacity="0.6"/>
+  
+  <!-- Neon Sun/Energy Source -->
+  <circle cx="250" cy="50" r="30" fill="url(#neonSunGradient)"/>
+  <circle cx="250" cy="50" r="30" fill="none" stroke="#ff0066" stroke-width="2" opacity="0.7">
+    <animate attributeName="r" values="30;35;30" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.7;0.3;0.7" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Neon Shark -->
+  <g transform="translate(150, 150) scale(0.8)">
+    <!-- Shark Body Outline -->
+    <path d="M-60,-10 C-40,-30 40,-30 60,-10 L80,0 L60,10 C40,30 -40,30 -60,10 Z" fill="url(#neonSharkGradient)" opacity="0.8"/>
+    
+    <!-- Shark Outline Glow -->
+    <path d="M-60,-10 C-40,-30 40,-30 60,-10 L80,0 L60,10 C40,30 -40,30 -60,10 Z" fill="none" stroke="#ff0066" stroke-width="2" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;0.4;0.8" dur="2s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- Shark Fins -->
+    <path d="M0,-30 L15,-5 L-15,-5 Z" fill="#ff0066" opacity="0.9"/>
+    <path d="M40,0 L70,-25 L70,25 Z" fill="#9c27b0" opacity="0.9"/>
+    <path d="M-40,0 L-70,-25 L-70,25 Z" fill="#3f51b5" opacity="0.9"/>
+    
+    <!-- Shark Eye -->
+    <circle cx="-35" cy="-5" r="4" fill="#ffcc00"/>
+    <circle cx="-35" cy="-5" r="2" fill="#ffffff"/>
+    
+    <!-- Shark Gills -->
+    <path d="M-25,0 L-27,7 M-20,0 L-22,7 M-15,0 L-17,7" stroke="#ffffff" stroke-width="1.5" opacity="0.9"/>
+  </g>
+  
+  <!-- Gradients -->
+  <defs>
+    <radialGradient id="neonSunGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#ff0066" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#9c27b0" stop-opacity="0.8"/>
+    </radialGradient>
+    
+    <linearGradient id="neonSharkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff0066" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#9c27b0" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#3f51b5" stop-opacity="0.8"/>
+    </linearGradient>
+  </defs>
+</svg>
